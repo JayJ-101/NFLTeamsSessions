@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using NFLTeams.Models;
 using NFLTeamsSessions.Models;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace NFLTeamsSessions.Controllers
 {
@@ -22,6 +18,10 @@ namespace NFLTeamsSessions.Controllers
 
         public IActionResult Index(string activeConf = "all", string activeDiv = "all")
         {
+            var session = new NFLSession(HttpContext.Session);
+            session.SetActiveConf(activeConf);
+            session.SetActiveDiv(activeDiv);
+
             var data = new TeamListViewModel
             {
                 ActiveConf = activeConf,
@@ -42,7 +42,6 @@ namespace NFLTeamsSessions.Controllers
 
             return View(data);
         }
-
 
         public IActionResult Details(string id)
         {
@@ -82,6 +81,5 @@ namespace NFLTeamsSessions.Controllers
                 });
         }
 
-       
     }
 }

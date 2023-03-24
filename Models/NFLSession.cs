@@ -37,6 +37,11 @@ namespace NFLTeamsSessions.Models
         public void SetActiveDiv(string activeDiv) => session.SetString(DivKey, activeDiv);
         public string GetActiveDiv() => session.GetString(DivKey);
 
+        public void RemoveMyTeams()
+        {
+            session.Remove(TeamsKey);
+            session.Remove(CountKey);
+        }
         
     }
 }
